@@ -3,6 +3,10 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.compose.compiler)
     id("org.lsposed.lsplugin.apksign") version "1.4"
+
+    // Google Firebase Crashlytics
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 apksign {
@@ -107,4 +111,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
     implementation("com.caoccao.javet:javet-node-android:4.1.1")
+
+    // Google Firebase Crashlytics
+    implementation(platform("com.google.firebase:firebase-bom:34.2.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ndk")
 }

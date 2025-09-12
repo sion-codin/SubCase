@@ -6,6 +6,7 @@
     <string name="backend">后端</string>
     <string name="address">地址</string>
     <string name="allow_lan">允许局域网访问</string>
+    <string name="allow_crash_report">允许上报崩溃</string>
     <string name="info_screen">关于应用</string>
 
     <string name="version">版本</string>

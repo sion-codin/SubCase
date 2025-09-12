@@ -3,6 +3,7 @@ package ano.subcase
 import android.app.Application
 import ano.subcase.util.AppUtil
 import ano.subcase.util.ConfigStore
+import ano.subcase.util.CrashReporter
 import ano.subcase.util.SubStore
 import timber.log.Timber
 
@@ -16,6 +17,8 @@ class CaseApplication : Application() {
         Timber.plant(Timber.DebugTree())
         Timber.d("TimberInitializer is initialized.")
         caseApp = this
+
+        CrashReporter.initialize()
 
         if (ConfigStore.isFirstOpen) {
             AppUtil.initFirstOpen()

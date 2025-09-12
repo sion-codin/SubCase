@@ -78,12 +78,15 @@ fun MainScreen(navController: NavController) {
             FrontEndCard(mViewModel)
             Spacer(modifier = Modifier.padding(10.dp))
             BackEndCard(mViewModel)
-            HintSpan()
+            HintSpan("你可以点击backend地址,来快速复制")
             Spacer(modifier = Modifier.padding(10.dp))
             AllowLanSpan(mViewModel)
             if (mViewModel.allowLan) {
                 AllowLanHint()
             }
+            Spacer(modifier = Modifier.padding(10.dp))
+            AllowCrashReport(mViewModel)
+            HintSpan("仅在应用崩溃时发送,我们不会收集任何其他信息")
             Spacer(modifier = Modifier.padding(10.dp))
             OpenSubStore(mViewModel)
             Spacer(modifier = Modifier.padding(10.dp))
@@ -93,7 +96,6 @@ fun MainScreen(navController: NavController) {
         if (CaseStatus.showUpdateDialog.value) {
             UpdateDialog()
         }
-
     }
 }
 
@@ -428,12 +430,51 @@ fun AllowLanSpan(mViewModel: MainViewModel) {
 }
 
 @Composable
-fun HintSpan() {
+fun AllowCrashReport(mViewModel: MainViewModel) {
+    val haptic = LocalHapticFeedback.current
+
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp)
+                .padding(horizontal = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                stringResource(R.string.allow_crash_report),
+            )
+
+            Switch(
+                checked = mViewModel.allowCrashReport,
+                onCheckedChange = {
+                    haptic.performHapticFeedback(
+                        HapticFeedbackType.TextHandleMove
+                    )
+
+                    mViewModel.allowCrashReport = it
+                    ConfigStore.isAllowCrashReport = it
+                },
+                colors = switchColors(),
+                modifier = Modifier.scale(0.9f)
+            )
+        }
+    }
+}
+
+@Composable
+fun HintSpan(hint: String) {
     Text(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 10.dp, top = 5.dp),
-        text = "你可以点击backend地址,来快速复制",
+        text = hint,
         color = Color(0xFF909399),
         fontSize = 14.sp
     )

@@ -21,4 +21,8 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.compose.compiler) apply false
+
+    // Google Firebase Crashlytics
+    id("com.google.gms.google-services") version "4.4.3" apply false
+    id("com.google.firebase.crashlytics") version "3.0.6" apply false
 }
