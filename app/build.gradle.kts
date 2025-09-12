@@ -110,7 +110,7 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
-    implementation("com.caoccao.javet:javet-node-android:4.1.1")
+    implementation("com.caoccao.javet:javet-node-android:4.1.7")
 
     // Google Firebase Crashlytics
     implementation(platform("com.google.firebase:firebase-bom:34.2.0"))
