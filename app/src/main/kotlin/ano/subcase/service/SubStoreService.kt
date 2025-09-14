@@ -3,7 +3,7 @@ package ano.subcase.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import ano.subcase.CaseStatus
+import ano.subcase.GlobalStatus
 import ano.subcase.engine.CaseEngine
 import ano.subcase.util.NotificationUtil
 
@@ -30,7 +30,7 @@ class SubStoreService : Service() {
 
         NotificationUtil.startNotification(this)
 
-        CaseStatus.isServiceRunning.value = true
+        GlobalStatus.isServiceRunning.value = true
 
         return START_STICKY
     }
@@ -38,7 +38,7 @@ class SubStoreService : Service() {
     override fun onDestroy() {
         super.onDestroy()
         caseEngine!!.stopServer()
-        CaseStatus.isServiceRunning.value = false
+        GlobalStatus.isServiceRunning.value = false
         NotificationUtil.stopNotification()
     }
 }

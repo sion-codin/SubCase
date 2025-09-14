@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ano.subcase.GlobalStatus
 import ano.subcase.caseApp
 import ano.subcase.service.SubStoreService
 import ano.subcase.util.ConfigStore
@@ -20,7 +21,7 @@ class MainViewModel : ViewModel() {
         allowLan = ConfigStore.isAllowLan
         allowCrashReport = ConfigStore.isAllowCrashReport
 
-        if (ConfigStore.isServiceRunning) {
+        if (ConfigStore.isServiceRunning && !GlobalStatus.isServiceRunning.value) {
             startService()
         }
     }
@@ -32,12 +33,14 @@ class MainViewModel : ViewModel() {
         intent.putExtra("allowLan", allowLan)
         viewModelScope.launch {
             caseApp.startService(intent)
+            ConfigStore.isServiceRunning = true
         }
     }
 
     fun stopService() {
         viewModelScope.launch {
             caseApp.stopService(Intent(caseApp, SubStoreService::class.java))
+            ConfigStore.isServiceRunning = false
         }
     }
 }

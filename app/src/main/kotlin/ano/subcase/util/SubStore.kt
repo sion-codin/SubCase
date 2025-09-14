@@ -1,7 +1,7 @@
 package ano.subcase.util
 
 import android.widget.Toast
-import ano.subcase.CaseStatus
+import ano.subcase.GlobalStatus
 import ano.subcase.caseApp
 import ano.subcase.util.AppUtil.unzip
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -65,7 +65,7 @@ object SubStore {
             }
 
             if ((remoteFrontendVersion.isNotEmpty() && remoteFrontendVersion != localFrontendVersion) || (remoteBackendVersion.isNotEmpty() && remoteBackendVersion != localBackendVersion)) {
-                CaseStatus.showUpdateDialog.value = true
+                GlobalStatus.showUpdateDialog.value = true
             } else if (frontendResult.isSuccess && backendResult.isSuccess && showToast) {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(

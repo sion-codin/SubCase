@@ -4,13 +4,13 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
-import ano.subcase.CaseStatus
+import ano.subcase.GlobalStatus
 import ano.subcase.caseApp
 import timber.log.Timber
+import java.net.Inet4Address
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.util.Enumeration
-import java.net.Inet4Address
 
 object NetworkUtil {
     val connectivity = caseApp.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -26,8 +26,8 @@ object NetworkUtil {
             when {
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
                     Timber.d("Network available : $network , type is WIFI")
-                    CaseStatus.isWifi.value = true
-                    CaseStatus.lanIP.value = getLanIp() ?: ""
+                    GlobalStatus.isWifi.value = true
+                    GlobalStatus.lanIP.value = getLanIp() ?: ""
                 }
 
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
@@ -50,7 +50,7 @@ object NetworkUtil {
             when {
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
                     Timber.d("Network lost : $network , type is WIFI")
-                    CaseStatus.isWifi.value = false
+                    GlobalStatus.isWifi.value = false
                 }
 
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {

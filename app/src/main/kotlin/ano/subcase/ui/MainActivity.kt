@@ -4,14 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import ano.subcase.CaseStatus
+import ano.subcase.GlobalStatus
 import ano.subcase.ui.theme.SubCaseTheme
 import ano.subcase.util.NetworkUtil
 import ano.subcase.util.NotificationUtil
@@ -33,7 +31,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        CaseStatus.lanIP.value = NetworkUtil.getLanIp() ?: ""
+        GlobalStatus.lanIP.value = NetworkUtil.getLanIp() ?: ""
 
         // prepare notification
         NotificationUtil.checkAndRequestPermission()

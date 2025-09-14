@@ -48,7 +48,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import ano.subcase.BuildConfig
-import ano.subcase.CaseStatus
+import ano.subcase.GlobalStatus
 import ano.subcase.R
 import ano.subcase.ui.theme.Blue
 import ano.subcase.ui.theme.switchColors
@@ -93,7 +93,7 @@ fun MainScreen(navController: NavController) {
             FooterSpan()
         }
 
-        if (CaseStatus.showUpdateDialog.value) {
+        if (GlobalStatus.showUpdateDialog.value) {
             UpdateDialog()
         }
     }
@@ -144,7 +144,7 @@ fun UpdateDialog() {
                         if (isUpdating.value) {
                             return@clickable
                         }
-                        CaseStatus.showUpdateDialog.value = false
+                        GlobalStatus.showUpdateDialog.value = false
                     },
                     color = Color.Gray,
                     text = "取消",
@@ -202,7 +202,7 @@ fun ServerSwitch(mViewModel: MainViewModel) {
             )
 
             Switch(
-                checked = CaseStatus.isServiceRunning.value,
+                checked = GlobalStatus.isServiceRunning.value,
                 onCheckedChange = {
                     haptic.performHapticFeedback(
                         HapticFeedbackType.TextHandleMove
@@ -263,7 +263,7 @@ fun FrontEndCard(mViewModel: MainViewModel) {
 
                 val host: String
                 if (mViewModel.allowLan) {
-                    host = CaseStatus.lanIP.value
+                    host = GlobalStatus.lanIP.value
                 } else {
                     host = "127.0.0.1"
                 }
@@ -347,7 +347,7 @@ fun BackEndCard(mViewModel: MainViewModel) {
                 val clipboardManager = LocalClipboardManager.current
 
                 val host: String = if (mViewModel.allowLan) {
-                    CaseStatus.lanIP.value
+                    GlobalStatus.lanIP.value
                 } else {
                     "127.0.0.1"
                 }
@@ -483,7 +483,7 @@ fun HintSpan(hint: String) {
 @Composable
 fun AllowLanHint() {
 
-    if (CaseStatus.isWifi.value) {
+    if (GlobalStatus.isWifi.value) {
         return
     }
 
@@ -504,7 +504,7 @@ fun OpenSubStore(mViewModel: MainViewModel) {
 
     val host: String
     if (mViewModel.allowLan) {
-        host = CaseStatus.lanIP.value
+        host = GlobalStatus.lanIP.value
     } else {
         host = "127.0.0.1"
     }

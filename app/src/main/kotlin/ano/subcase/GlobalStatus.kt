@@ -2,7 +2,7 @@ package ano.subcase
 
 import androidx.compose.runtime.mutableStateOf
 
-object CaseStatus {
+object GlobalStatus {
     var isWifi = mutableStateOf(false)
     var lanIP = mutableStateOf("")
 
