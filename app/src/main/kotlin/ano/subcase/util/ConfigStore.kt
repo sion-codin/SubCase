@@ -59,7 +59,7 @@ object ConfigStore {
     var localFrontendVersion: String
         get() = getInstance().getString(FRONTEND_LOCAL_VER, "")!!
         set(value) {
-            getInstance().edit().putString(FRONTEND_LOCAL_VER, value).apply()
+            getInstance().edit { putString(FRONTEND_LOCAL_VER, value) }
         }
 
     var localBackendVersion: String

@@ -7,9 +7,11 @@ import android.net.NetworkRequest
 import ano.subcase.GlobalStatus
 import ano.subcase.caseApp
 import timber.log.Timber
+import java.io.IOException
 import java.net.Inet4Address
 import java.net.InetAddress
 import java.net.NetworkInterface
+import java.net.ServerSocket
 import java.util.Enumeration
 
 object NetworkUtil {
@@ -106,5 +108,13 @@ object NetworkUtil {
             ex.printStackTrace()
         }
         return null
+    }
+
+    fun isPortInUse(port: Int): Boolean {
+        return try {
+            ServerSocket(port).use { false }
+        } catch (e: IOException) {
+            true // Port is in use
+        }
     }
 }
