@@ -73,6 +73,9 @@ android {
     }
     packaging {
         resources.excludes.addAll(listOf("META-INF/*"))
+        jniLibs {
+            useLegacyPackaging = true
+        }
     }
     buildFeatures {
         compose = true
